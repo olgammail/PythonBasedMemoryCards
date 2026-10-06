@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Memory Cards</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="game-shell">
+        <section class="hero">
+            <p class="eyebrow">Flask + JavaScript Browser Game</p>
+            <h1>Python Memory Cards 🐍</h1>
+            <p class="intro">Flip two cards at a time. Match all the pairs as quickly as you can!</p>
+        </section>
+
+        <section id="level-picked" class="level-choosen"  aria-label="Picked level">
+            <h2>Choose your difficulty</h2>
+            <div class="radio-groups">
+                <div class="level-difficulty">
+                    <p class="group-label">Level Difficulty</p>
+                    <label>
+                        <input type="radio" name="level" value="easy"   checked>
+                            Easy (no time limit)
+                    </label><br>
+
+                    <label>
+                        <input type="radio" name="level" value="hard">
+                            Hard – 2 minutes total
+                     </label><br>
+
+                    <label>
+                        <input type="radio" name="level" value="expert">
+                            Expert – 1 minutes total
+                    </label><br>
+                </div>
+                <div class="card-type-choice">
+                <p class="group-label">Cards type</p>
+                  <label>
+                    <input type="radio" name="typeCard" value="numbers">
+                        Numbers
+                  </label><br>
+                  <label>
+                    <input type="radio" name="typeCard" value="emoji"  checked>
+                        Emoji
+                  </label><br>
+                  <label>
+                    <input type="radio" name="typeCard" value="flowers">
+                        Flowers
+                  </label><br>
+                </div>
+            </div><br><br>
+
+            <button id="start-game" class="start">Start game</button>
+        </section>
+
+        <section id="game-container" style="display:none;">
+
+            <section class="scoreboard" aria-label="Game status">
+                <div class="score-card">
+                    <span class="label">Moves</span>
+                    <strong id="moves">0</strong>
+                </div>
+                <div class="score-card">
+                    <span class="label">Time</span>
+                    <strong id="timer">0s</strong>
+                </div>
+                <div class="score-card" id="maxTimeHidden" style="display:none;">
+                    <span class="label">Max Available Time</span>
+                    <strong id="maxTime">none</strong>
+                </div>
+
+                <button id="restart" type="button">Restart</button>
+            </section>
+
+            <p id="message" class="message" aria-live="polite">Click any card to begin.</p>
+
+            <section class="board-wrapper" style="position:relative;">
+                <section id="game-board" class="game-board" aria-label="Memory card grid"></section>
+                <!-- NEW – overlay that will show “Game Over” -->
+                <div id="game-over-overlay" class="game-over-overlay" style="display:none;">
+                    <span id="game-over-text"></span>
+                </div>
+            </section>
+
+        </section> 
+
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

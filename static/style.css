@@ -1,0 +1,238 @@
+:root {
+    --bg: #f5f0ff;
+    --panel: #ffffff;
+    --ink: #242038;
+    --muted: #6d6680;
+    --purple: #7c3aed;
+    --pink: #ec4899;
+    --yellow: #facc15;
+    --green: #22c55e;
+    --card-back: linear-gradient(135deg, #7c3aed, #ec4899);
+    --shadow: 0 18px 40px rgba(36, 32, 56, 0.16);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--ink);
+    background:
+        radial-gradient(circle at top left, rgba(250, 204, 21, 0.35), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(124, 58, 237, 0.25), transparent 35%),
+        var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.game-shell {
+    width: min(760px, 100%);
+    background: rgba(255, 255, 255, 0.86);
+    border: 4px solid #ffffff;
+    border-radius: 30px;
+    box-shadow: var(--shadow);
+    padding: 28px;
+}
+
+.hero {
+    text-align: center;
+}
+
+.eyebrow {
+    margin: 0;
+    color: var(--purple);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+}
+
+h1 {
+    margin: 8px 0;
+    font-size: clamp(2rem, 6vw, 3.6rem);
+}
+
+.intro {
+    margin: 0 auto 22px;
+    max-width: 520px;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.scoreboard {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.score-card,
+button {
+    border: 0;
+    border-radius: 18px;
+    padding: 14px 20px;
+    box-shadow: 0 8px 20px rgba(36, 32, 56, 0.1);
+}
+
+.score-card {
+    min-width: 120px;
+    background: var(--panel);
+    text-align: center;
+}
+
+.label {
+    display: block;
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.score-card strong {
+    display: block;
+    margin-top: 4px;
+    font-size: 1.8rem;
+}
+
+button {
+    background: var(--ink);
+    color: white;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.15s ease;
+}
+
+button:hover {
+    background: var(--purple);
+    transform: translateY(-2px);
+}
+
+.message {
+    min-height: 30px;
+    text-align: center;
+    font-weight: 800;
+    color: var(--pink);
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(68px, 1fr));
+    gap: 14px;
+}
+
+.card {
+    aspect-ratio: 1;
+    border: 0;
+    border-radius: 22px;
+    background: var(--card-back);
+    color: transparent;
+    font-size: clamp(2rem, 9vw, 4rem);
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 10px 18px rgba(124, 58, 237, 0.25);
+    transform-style: preserve-3d;
+    transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.card::after {
+    content: "?";
+    color: white;
+    font-weight: 900;
+}
+
+.card.flipped,
+.card.matched {
+    background: #ffffff;
+    color: var(--ink);
+    transform: rotateY(180deg) scaleX(-1);/*to cancel rotation of numbers*/
+}
+
+.card.flipped::after,
+.card.matched::after {
+    content: "";
+}
+
+.card.matched {
+    background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+    box-shadow: 0 10px 18px rgba(34, 197, 94, 0.24);
+    cursor: default;
+}
+
+.card:disabled {
+    cursor: default;
+}
+
+
+
+
+
+/* -------------------------------------------------
+   Game‑over overlay – covers only the board area
+   ------------------------------------------------- */
+.board-wrapper {
+    /* already has position:relative in the inline style above */
+}
+
+.game-over-overlay {
+    position: absolute;
+    inset: 0;                     /* top/right/bottom/left = 0 → full size of wrapper */
+    background: rgba(255,255,255,0.85);   /* semi‑transparent white (change to rgba(0,0,0,0.7) if you want dark) */
+    color: var(--pink);         /* same pink you use for messages */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(2rem, 8vw, 4rem);
+    font-weight: 800;
+    z-index: 10;                 /* sits above the cards */
+    pointer-events: all;        /* catches clicks so cards don’t react */
+    text-align: center;
+}
+
+/* Optional – make the cards look “dimmed” when the overlay is visible */
+.board-wrapper.game-over .card {
+    opacity: 0.4;                /* keep them visible but faded */
+}
+
+/* Layout for radio button groups side by side */
+.radio-groups {
+    display: flex;
+    gap: 6orem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+   /* justify-content: center; */
+}
+/*.card-type-choice { margin-left:auto; }*/ /* pushes the whole group to the far right */
+.level-difficulty,
+.card-type-choice {
+    display: flex;
+    flex-direction: column;
+}
+.level-difficulty label,
+.card-type-choice label {
+    margin-bottom: 0.5rem;
+}
+
+
+@media (max-width: 520px) {
+    body {
+        padding: 12px;
+    }
+
+    .game-shell {
+        padding: 18px;
+        border-radius: 22px;
+    }
+
+    .game-board {
+        gap: 10px;
+    }
+}
