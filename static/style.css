@@ -204,7 +204,7 @@ button:hover {
 /* Layout for radio button groups side by side */
 .radio-groups {
     display: flex;
-    gap: 6orem;
+    gap: 6rem;
     align-items: flex-start;
     flex-wrap: wrap;
     margin-bottom: 1rem;
